@@ -13,7 +13,7 @@ from flask_cors import CORS, cross_origin
 #from datetime import datetime
 
 # import handlers
-from controllers.TimesheetHandler import BaseTimesheet
+from backend.controllers.TimesheetHandler import BaseTimesheet
 
 app = Flask(__name__)
 db = SQLAlchemy(app)                       #initialize SQLAlchemy
