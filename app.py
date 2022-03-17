@@ -1,18 +1,16 @@
-from distutils.log import debug
+#from distutils.log import debug
 import os
-from flask import Flask
 from flask_sqlalchemy import SQLAlchemy
-import flask_cors
 import flask_praetorian
+from flask import Flask, jsonify, request, render_template
+from flask_cors import CORS, cross_origin
 #import config.app_config
 
 #from crypt import methods
-from urllib import response
-from flask import Flask, jsonify, request, render_template
-from flask_cors import CORS, cross_origin
+#from urllib import response
+
 #from handlers.TimesheetHandler import TimesheetHandler
-from datetime import datetime
-import app
+#from datetime import datetime
 
 # import handlers
 from controllers.TimesheetHandler import BaseTimesheet
@@ -20,7 +18,7 @@ from controllers.TimesheetHandler import BaseTimesheet
 app = Flask(__name__)
 db = SQLAlchemy(app)                       #initialize SQLAlchemy
 guard = flask_praetorian.Praetorian()      #initialize flask praetorian
-cors = flask_cors.CORS(app)                #initialize CORS
+cors = CORS(app)                #initialize CORS
 app.debug = True                           #Change for deployment
 
 app.config['SQLALCHEMY_DATABASE_URI'] = os.environ.get('DATABASE_URL')          #set databaase connection string
@@ -66,10 +64,10 @@ def index():
 def handleTimesheet(employee_id):
     if request.method == "GET":
         return BaseTimesheet().getTimesheet(employee_id)
-    # if request.method == "POST":
-    #     return BaseTimesheet().createTimesheet()
-    # if request.method == "PUT":
-    #     return BaseTimesheet().updateTimesheet()
+    if request.method == "POST":
+        return jsonify("This is a POST"), 200
+    if request.method == "PUT":
+        return jsonify("This is a PUT"), 200
 
 
 # start app with main method
