@@ -1,16 +1,16 @@
 import psycopg2
-import config.dbconfig
+import backend.config.dbconfig
 
 
 class TimesheetDAO:
 
     def __init__(self):
         connection_url = "dbname=%s user=%s host=%s password=%s port = %s"  % (
-            config.dbconfig.pg_config['dbname'],
-            config.dbconfig.pg_config['user'],
-            config.dbconfig.pg_config['host'],
-            config.dbconfig.pg_config['password'],
-            config.dbconfig.pg_config['dbport'])
+            backend.config.dbconfig.pg_config['dbname'],
+            backend.config.dbconfig.pg_config['user'],
+            backend.config.dbconfig.pg_config['host'],
+            backend.config.dbconfig.pg_config['password'],
+            backend.config.dbconfig.pg_config['dbport'])
         self.conn = psycopg2.connect(connection_url)
 
     # returns all work times of an employee
