@@ -30,3 +30,15 @@ class BaseTimesheet:
         for t in tuples:
             result.append(self.build_row_dict(row=t))
         return jsonify(result)
+
+    def createTimesheet(self, json):
+        employee_id = json['employee_id']
+        start_time = json['start_time']
+        end_time = json['end_time']
+        work_desc = json['work_desc']
+        dao = TimesheetDAO()
+        timesheet_id = dao.createTimesheet(work_desc, start_time, end_time, employee_id)
+        if timesheet_id == False:
+            return jsonify('Authorization ERROR! Check this later, says the dev team to the dev team!'), 401
+        result = self.build_attr_dict(timesheet_id, start_time, end_time, work_desc, employee_id)
+        return jsonify(result), 201
