@@ -1,5 +1,6 @@
 #from distutils.log import debug
 import os
+from urllib import response
 from flask_sqlalchemy import SQLAlchemy
 import flask_praetorian
 from flask import Flask, jsonify, request, render_template
@@ -65,7 +66,7 @@ def handleTimesheet(employee_id):
     if request.method == "GET":
         return BaseTimesheet().getTimesheet(employee_id)
     if request.method == "POST":
-        return jsonify("This is a POST"), 200
+        return BaseTimesheet().createTimesheet(request.json)
     if request.method == "PUT":
         return jsonify("This is a PUT"), 200
 
