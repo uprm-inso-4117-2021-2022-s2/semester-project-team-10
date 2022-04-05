@@ -11,6 +11,9 @@
 /backend/Include
 /backend/pyvenv.cfg
 
+# misc
+/local_env_vars.py
+
 # testing
 /coverage
 

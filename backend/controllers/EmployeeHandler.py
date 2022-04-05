@@ -25,6 +25,20 @@ class BaseEmployee:
         result['wage'] = wage
         #result['password'] = password
         return result
+    
+    def addNewUser(self, json):
+        username = json['username']
+        user_email = json['user_email']
+        user_password= json['user_password']
+        role = json['role']
+        wage = json['wage']
+        user_password = generate_password_hash(user_password)
+        dao = EmployeeDAO()
+        employee_id = dao.insertEmployee(username, user_email, user_password, role, wage)
+        if employee_id == 'Email taken':
+            return jsonify("Email or Username is taken. Please use a different one!"), 400
+        result = self.build_attr_dict(employee_id, username, user_email, role, wage)
+        return jsonify(result), 201
 
     def userExists(self, email, password):
         dao = EmployeeDAO()
