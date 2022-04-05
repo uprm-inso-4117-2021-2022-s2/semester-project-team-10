@@ -1,5 +1,5 @@
 from flask import jsonify
-from DAOs.EmployeeDAO import EmployeeDAO
+from backend.DAOs.EmployeeDAO import EmployeeDAO
 from werkzeug.security import generate_password_hash, check_password_hash
 
 class BaseEmployee:
