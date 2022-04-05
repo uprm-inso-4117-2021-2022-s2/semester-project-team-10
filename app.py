@@ -76,6 +76,13 @@ def login_auth():
         return jsonify("Incorrect password!"), 401
     else:
         return jsonify(user_exists), 200
+    
+@app.route('/employee', methods = ['GET', 'POST', 'PUT'])
+def handleEmployee():
+    if request.method == "GET":
+        return None
+    if request.method == "POST":
+        return BaseEmployee().addNewUser(request.json)
 
 @app.route('/timesheet/<int:employee_id>', methods = ['GET', 'PUT', 'POST'])
 def handleTimesheet(employee_id):
@@ -85,7 +92,6 @@ def handleTimesheet(employee_id):
         return BaseTimesheet().createTimesheet(request.json)
     if request.method == "PUT":
         return jsonify("This is a PUT"), 200
-
 
 # start app with main method
 if __name__ == "__main__":
