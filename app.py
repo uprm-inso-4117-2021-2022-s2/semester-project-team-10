@@ -5,6 +5,7 @@ from flask_sqlalchemy import SQLAlchemy
 import flask_praetorian
 from flask import Flask, jsonify, request, render_template
 from flask_cors import CORS, cross_origin
+from flask_jwt_extended import create_access_token, get_jwt_identity, jwt_required, JWTManager
 #import config.app_config
 
 #from crypt import methods
@@ -15,6 +16,7 @@ from flask_cors import CORS, cross_origin
 
 # import handlers
 from backend.controllers.TimesheetHandler import BaseTimesheet
+from backend.controllers.EmployeeHandler import BaseEmployee
 
 app = Flask(__name__)
 db = SQLAlchemy(app)                       #initialize SQLAlchemy
@@ -60,6 +62,20 @@ cors.init_app(app)
 @app.route('/')
 def index():
     return 'Welcome to the Timeflocker App!'
+
+@app.route('/login', methods=['POST'])
+def login_auth():
+    email = request.json.get("email", None)
+    password = request.json.get("password", None)
+    user_exists = {
+        "user_data": BaseEmployee().userExists(email, password),
+        "access_token": create_access_token(identity=email) } 
+    if  user_exists["user_data"] == "0":
+        return jsonify("User Not Found!"), 404
+    elif user_exists["user_data"] == "1":
+        return jsonify("Incorrect password!"), 401
+    else:
+        return jsonify(user_exists), 200
 
 @app.route('/timesheet/<int:employee_id>', methods = ['GET', 'PUT', 'POST'])
 def handleTimesheet(employee_id):

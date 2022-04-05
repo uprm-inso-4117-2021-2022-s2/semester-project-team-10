@@ -1,6 +1,6 @@
 import axios from "axios";
 
-const API_URL = "https://db-404-error-power-not-found.herokuapp.com/404-error-power-not-found/";
+const API_URL = "https://time-flocker-2022.herokuapp.com/";
 
 const register = (user_name, email, password, auth) => {
   return axios.post(API_URL + "User/users", {
@@ -13,7 +13,7 @@ const register = (user_name, email, password, auth) => {
 
 const login = async (email, password) => {
   const response = await axios
-    .post(API_URL + "User/login", {
+    .post(API_URL + "login", {
       email,
       password,
     });
