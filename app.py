@@ -89,6 +89,8 @@ def handleEmployee():
         return None
     if request.method == "POST":
         return BaseEmployee().addNewUser(request.json)
+    if request.method == "PUT":
+        return jsonify("This is a PUT")
 
 @app.route('/timesheet/<int:employee_id>', methods = ['GET', 'PUT', 'POST'])
 def handleTimesheet(employee_id):
