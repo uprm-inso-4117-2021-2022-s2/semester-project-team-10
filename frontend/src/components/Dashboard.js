@@ -17,25 +17,24 @@ import {
 
 import "./Dashboard.css";
 
-class Dashboard extends Component {
-  state = {
-    dropdownMenuStyle: {
-      display: "none"
-    }
-  };
+const Dashboard = (props) => {
+  // state = {
+  //   dropdownMenuStyle: {
+  //     display: "none"
+  //   }
+  // };
 
-  handleToggleDropdownMenu = () => {
-    let newState = Object.assign({}, this.state);
-    if (newState.dropdownMenuStyle.display === "none") {
-      newState.dropdownMenuStyle = { display: "flex" };
-    } else {
-      newState.dropdownMenuStyle = { display: "none" };
-    }
+  // handleToggleDropdownMenu = () => {
+  //   let newState = Object.assign({}, this.state);
+  //   if (newState.dropdownMenuStyle.display === "none") {
+  //     newState.dropdownMenuStyle = { display: "flex" };
+  //   } else {
+  //     newState.dropdownMenuStyle = { display: "none" };
+  //   }
 
-    this.setState(newState);
-  };
+  //   this.setState(newState);
+  // };
 
-  render() {
     return (
       <div className="App">
         <Grid padded className="tablet computer only">
@@ -60,25 +59,26 @@ class Dashboard extends Component {
             <Menu.Item header as="a">
               Timeflocker
             </Menu.Item>
-            <Menu.Menu position="right">
+            {/* <Menu.Menu position="left">
               <Menu.Item>
                 <Button
                   basic
                   inverted
                   icon
+                  size="big"
                   toggle
-                  onClick={this.handleToggleDropdownMenu}
+                  //onClick={this.handleToggleDropdownMenu}
                 >
                   <Icon name="content" />
                 </Button>
               </Menu.Item>
-            </Menu.Menu>
+            </Menu.Menu> */}
             <Menu
               borderless
               fluid
               inverted
               vertical
-              style={this.state.dropdownMenuStyle}
+              //style={this.state.dropdownMenuStyle}
             >
               <Menu.Item as="a">Dashboard</Menu.Item>
               <Menu.Item as="a">Settings</Menu.Item>
@@ -99,23 +99,16 @@ class Dashboard extends Component {
             only="tablet computer"
             id="sidebar"
           >
+            <Image circular size='big' src="/static/images/wireframe/square-image.png"/>
+            <Divider section/>
             <Menu vertical borderless fluid text>
               <Menu.Item active as="a">
                 Overview
               </Menu.Item>
-              <Menu.Item as="a">Reports</Menu.Item>
-              <Menu.Item as="a">Analytics</Menu.Item>
-              <Menu.Item as="a">Export</Menu.Item>
-              <Divider hidden />
-              <Menu.Item as="a">Nav item</Menu.Item>
-              <Menu.Item as="a">Nav item again</Menu.Item>
-              <Menu.Item as="a">One more nav</Menu.Item>
-              <Menu.Item as="a">Another nav item</Menu.Item>
-              <Menu.Item as="a">More navigation</Menu.Item>
-              <Divider hidden />
-              <Menu.Item as="a">Macintoch</Menu.Item>
-              <Menu.Item as="a">Linux</Menu.Item>
-              <Menu.Item as="a">Windows</Menu.Item>
+              <Menu.Item as="a">Timesheet</Menu.Item>
+              <Menu.Item as="a">Pay Stubs</Menu.Item>
+              <Menu.Item as="a">Requests</Menu.Item>
+              <Menu.Item as="a">Work Trends</Menu.Item>
             </Menu>
           </Grid.Column>
           <Grid.Column
@@ -320,6 +313,5 @@ class Dashboard extends Component {
       </div>
     );
   }
-}
 
 export default Dashboard;

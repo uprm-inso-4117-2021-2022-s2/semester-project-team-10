@@ -9,11 +9,13 @@ import AuthService from "../services/auth.service";
 
 const LoginForm = (props) => {
 
-const [username, setUsername] = useState("");
 const [email, setEmail] = useState("");
 const [validEmail, validateEmail] = useState(true);
 const [password, setPassword] = useState("");
 const [validPassword, validatePassword] = useState(true);
+
+const [message, setMessage] = useState("");
+const [successful, setSuccessful] = useState(false);
 
 const onChangeEmail = (e) => {
     const email = e.target.value;
@@ -39,6 +41,31 @@ const onChangePassword = (e) => {
     validatePassword(schema.validate(password))
 };
 
+const handleLogin = (e) => {
+    e.preventDefault();
+
+    setMessage(""); //error message that can be displayed
+    setSuccessful(false);
+
+    AuthService.login(email, password).then(
+        (response) => {
+            setMessage(response.data.message);
+            setSuccessful(true);
+          },
+          (error) => {
+            const resMessage =
+              (error.response &&
+                error.response.data &&
+                error.response.data.message) ||
+              error.message ||
+              error.toString();
+  
+            setMessage(resMessage);
+            setSuccessful(false);
+          }
+        );
+    };
+
 return ( 
 <Grid textAlign='center' style={{ height: '100vh' }} verticalAlign='middle'>
     <Grid.Column style={{ maxWidth: 450 }}>
@@ -47,7 +74,8 @@ return (
         as={Link}
         to="/"/> Log-in to your account
     </Header>
-    <Form size='large'>
+    <Form size='large'
+        onSubmit={handleLogin}>
         <Segment stacked>
         <Form.Input fluid icon='user' iconPosition='left' placeholder='E-mail address' 
             value={email}
@@ -70,7 +98,7 @@ return (
             }}
         />
 
-        <Button color='teal' fluid size='large'>
+        <Button type='submit' color='teal' fluid size='large'>
             Login
         </Button>
         </Segment>
