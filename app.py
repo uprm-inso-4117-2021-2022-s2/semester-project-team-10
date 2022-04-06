@@ -24,13 +24,13 @@ guard = flask_praetorian.Praetorian()      #initialize flask praetorian
 cors = CORS(app)                #initialize CORS
 app.debug = True                           #Change for deployment
 
-# app.config['SQLALCHEMY_DATABASE_URI'] = os.environ.get('DATABASE_URL')          #set databaase connection string
-# app.config['JWT_SECRET_KEY'] = os.environ.get('SECRET_KEY')                     #Set encryption secret key
+app.config['SQLALCHEMY_DATABASE_URI'] = os.environ.get('DATABASE_URL')          #set databaase connection string
+app.config['JWT_SECRET_KEY'] = os.environ.get('SECRET_KEY')                     #Set encryption secret key
 
 # for debugin purposes only
-import local_env_vars as env
-app.config['SQLALCHEMY_DATABASE_URI'] = env.DB_URL
-app.config['JWT_SECRET_KEY'] = env.SECRET_KEY
+# import local_env_vars as env
+# app.config['SQLALCHEMY_DATABASE_URI'] = env.DB_URL
+# app.config['JWT_SECRET_KEY'] = env.SECRET_KEY
 
 app.config['JWT_ACCESS_LIFESPAN'] = {'hours': 24}                                       #JWT Lifespan
 app.config['JWT_REFRESH_LIFESPAN'] = {'days' : 30}
