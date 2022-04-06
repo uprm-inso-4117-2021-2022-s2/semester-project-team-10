@@ -2,12 +2,13 @@ import axios from "axios";
 
 const API_URL = "https://time-flocker-2022.herokuapp.com/";
 
-const register = (user_name, email, password, auth) => {
-  return axios.post(API_URL + "User/users", {
-    user_name,
-    email,
-    password,
-    auth,
+const register = (username, user_email, user_password, role, wage) => {
+  return axios.post(API_URL + "employee", {
+    username,
+    user_email,
+    user_password,
+    role,
+    wage
   });
 };
 
@@ -32,7 +33,7 @@ const getCurrentUser = () => {
 };
 
 const isLoggedIn = () => {
-  return !localStorage.getItem("user"); //DO NOT USE localStorage, use a safer alternative
+  return !localStorage.getItem("user"); //use a safer alternative
 }
 const removeAcount = (id_user,obj) => {
   return axios.delete(API_URL + "User/users/"+id_user, {data:obj});
