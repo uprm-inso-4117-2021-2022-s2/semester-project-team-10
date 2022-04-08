@@ -95,7 +95,7 @@ return (
   >
     <Image circular size='big' src="/static/images/wireframe/square-image.png"/>
     <Divider section/>
-    {MenuList()/** modify MenuList according to component */} 
+    {MenuList()/** modify MenuList according to component */}
   </Grid.Column>
   </Grid>
   </div>

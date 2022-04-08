@@ -59,14 +59,14 @@ const handleLogin = (e) => {
                 error.response.data.message) ||
               error.message ||
               error.toString();
-  
+
             setMessage(resMessage);
             setSuccessful(false);
           }
         );
     };
 
-return ( 
+return (
 <Grid textAlign='center' style={{ height: '100vh' }} verticalAlign='middle'>
     <Grid.Column style={{ maxWidth: 450 }}>
     <Header as='h2' color='teal' textAlign='center'>
@@ -77,7 +77,7 @@ return (
     <Form size='large'
         onSubmit={handleLogin}>
         <Segment stacked>
-        <Form.Input fluid icon='user' iconPosition='left' placeholder='E-mail address' 
+        <Form.Input fluid icon='user' iconPosition='left' placeholder='E-mail address'
             value={email}
             onChange={onChangeEmail}
             error={validEmail ? false: {
