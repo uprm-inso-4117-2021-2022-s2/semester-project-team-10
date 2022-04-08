@@ -1,5 +1,5 @@
 from flask import jsonify
-from backend.DAOs.EmployeeDAO import EmployeeDAO
+from DAOs.EmployeeDAO import EmployeeDAO
 from werkzeug.security import generate_password_hash, check_password_hash
 
 class BaseEmployee:
@@ -25,7 +25,7 @@ class BaseEmployee:
         result['wage'] = wage
         #result['password'] = password
         return result
-    
+
     def addNewUser(self, json):
         username = json['username']
         user_email = json['user_email']

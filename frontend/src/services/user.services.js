@@ -28,7 +28,7 @@ const createTimesheet = (employee_id, start_time, end_time, work_desc) => {
 //   invite_id_list.push(invited_id);
 //   const obj = {
 //     invite_id_list,
-//     meeting_id, 
+//     meeting_id,
 //     user_id
 //   }
 //   return axios.delete(API_URL + "Invites/invites/", {data:obj})

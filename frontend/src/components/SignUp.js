@@ -100,9 +100,9 @@ return (
           <Form.Input fluid icon='user' iconPosition='left' placeholder='Username' //username
             value={username}
             onChange={onChangeUsername}
-          />    
+          />
           <Form.Input fluid icon='mail' iconPosition='left' placeholder='E-mail address' // email
-          value={email} 
+          value={email}
           onChange={onChangeEmail}
           error={validEmail ? false: {
               content: 'Please enter a valid email address.',
@@ -139,18 +139,18 @@ return (
 
         <Divider/>
         <Form.Field required>
-            <Form.Dropdown 
-                placeholder='Select your role.' 
+            <Form.Dropdown
+                placeholder='Select your role.'
                 options={roleOptions}
                 selection
                 value={role}
                 onChange={onChangeRole}/>
         </Form.Field>
-        <Form.Input 
-            placeholder="Wage (i.e. $12.00)" 
-            icon='dollar' 
-            iconPosition='left' 
-            type='number' 
+        <Form.Input
+            placeholder="Wage (i.e. $12.00)"
+            icon='dollar'
+            iconPosition='left'
+            type='number'
             step='.01'
             value={wage}
             onChange={onChangeWage}/>
@@ -177,7 +177,7 @@ return (
       </Message>
     </Grid.Column>
   </Grid>
-    ); 
+    );
 };
 
 export default SignUp;

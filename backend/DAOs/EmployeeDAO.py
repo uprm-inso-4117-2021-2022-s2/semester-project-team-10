@@ -1,5 +1,5 @@
 from werkzeug.security import check_password_hash, generate_password_hash
-from backend.config.dbconfig import pg_config
+from config.dbconfig import pg_config
 import psycopg2
 
 class EmployeeDAO:
@@ -9,7 +9,7 @@ class EmployeeDAO:
                                                                             pg_config['host'])
         print("conection url:  ", connection_url)
         self.conn = psycopg2.connect(connection_url)
-    
+
     def insertEmployee(self, username, user_email, user_password, role, wage):
         cursor = self.conn.cursor()
         query = 'insert into "Employee" (username, user_email, user_password, role, wage) ' \
@@ -27,11 +27,11 @@ class EmployeeDAO:
             cursor.close()
             return "Email taken"
         else:
-            employee_id = q_return[0] 
+            employee_id = q_return[0]
             self.conn.commit()
             cursor.close()
         return employee_id
-    
+
     def userExists(self, user_email, user_password):
         cursor = self.conn.cursor()
         query = 'select user_password from "Employee" where user_email=%s limit 1'

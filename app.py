@@ -24,13 +24,13 @@ guard = flask_praetorian.Praetorian()      #initialize flask praetorian
 cors = CORS(app)                #initialize CORS
 app.debug = True                           #Change for deployment
 
-app.config['SQLALCHEMY_DATABASE_URI'] = os.environ.get('DATABASE_URL')          #set databaase connection string
-app.config['JWT_SECRET_KEY'] = os.environ.get('SECRET_KEY')                     #Set encryption secret key
+# app.config['SQLALCHEMY_DATABASE_URI'] = os.environ.get('DATABASE_URL')          #set databaase connection string
+# app.config['JWT_SECRET_KEY'] = os.environ.get('SECRET_KEY')                     #Set encryption secret key
 
 # for debugin purposes only
-# import local_env_vars as env
-# app.config['SQLALCHEMY_DATABASE_URI'] = env.DB_URL
-# app.config['JWT_SECRET_KEY'] = env.SECRET_KEY
+import local_env_vars as env
+app.config['SQLALCHEMY_DATABASE_URI'] = env.DB_URL
+app.config['JWT_SECRET_KEY'] = env.SECRET_KEY
 
 app.config['JWT_ACCESS_LIFESPAN'] = {'hours': 24}                                       #JWT Lifespan
 app.config['JWT_REFRESH_LIFESPAN'] = {'days' : 30}
@@ -77,14 +77,14 @@ def login_auth():
     password = request.json.get("user_password", None)
     user_exists = {
         "user_data": BaseEmployee().userExists(email, password),
-        "access_token": create_access_token(identity=email) } 
+        "access_token": create_access_token(identity=email) }
     if  user_exists["user_data"] == "0":
         return jsonify("User Not Found!"), 404
     elif user_exists["user_data"] == "1":
         return jsonify("Incorrect password!"), 401
     else:
         return jsonify(user_exists), 200
-    
+
 @app.route('/employee', methods = ['GET', 'POST', 'PUT'])
 def handleEmployee():
     if request.method == "GET":
