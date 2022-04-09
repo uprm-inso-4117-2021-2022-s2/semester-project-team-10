@@ -17,6 +17,8 @@ const [validPassword, validatePassword] = useState(true);
 const [message, setMessage] = useState("");
 const [successful, setSuccessful] = useState(false);
 
+const [errMsg, setErrMsg] = useState(false);
+
 const onChangeEmail = (e) => {
     const email = e.target.value;
     setEmail(email);
@@ -49,22 +51,30 @@ const handleLogin = (e) => {
 
     AuthService.login(email, password).then(
         (response) => {
-            setMessage(response.data.message);
+            setMessage("Login Successful!");
+            console.log(response.status);
+            setErrMsg(false)
             setSuccessful(true);
-          },
-          (error) => {
+            
+          }).catch((error) => {
+            setSuccessful(false);
             const resMessage =
               (error.response &&
                 error.response.data &&
                 error.response.data.message) ||
               error.message ||
               error.toString();
-
-            setMessage(resMessage);
-            setSuccessful(false);
+              //setMessage(resMessage);
+              console.log(successful);
+            error.response.status == 401? (setMessage("Unauthorized Access!"))
+                : (setMessage("Fatal Error!")) ;
+            //setMessage(resMessage);
+            
+            setErrMsg(true);
           }
         );
     };
+
 
 return (
 <Grid textAlign='center' style={{ height: '100vh' }} verticalAlign='middle'>
@@ -101,6 +111,9 @@ return (
         <Button type='submit' color='teal' fluid size='large'>
             Login
         </Button>
+        <Message negative hidden={successful}>
+            <Message.Content>{message}</Message.Content>
+        </Message>
         </Segment>
     </Form>
     <Message>
