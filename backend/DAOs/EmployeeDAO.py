@@ -1,5 +1,5 @@
 from werkzeug.security import check_password_hash, generate_password_hash
-from config.dbconfig import pg_config
+from backend.config.dbconfig import pg_config
 import psycopg2
 
 class EmployeeDAO:
