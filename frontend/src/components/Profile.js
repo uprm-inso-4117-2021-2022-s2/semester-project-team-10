@@ -94,7 +94,7 @@ return (
         id="sidebar"
         >
         <Header textAlign='center' size='huge'>My Profile</Header> 
-        <Icon style={{"margin-left":'25%'}} size='massive' name="user circle icon"/>
+        <Icon style={{"margin-left":'30%'}} size='massive' name="user circle icon"/>
         <Header textAlign='center'>Hello, {currentUser.user_data &&
                 currentUser.user_data.map((uData) => uData.username)}!
         </Header>
