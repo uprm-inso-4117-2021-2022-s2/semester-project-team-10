@@ -6,6 +6,7 @@ import App from "./App";
 import Dashboard from './components/Dashboard';
 import LoginForm from './components/Login';
 import PayStubs from './components/PayStubs';
+import Profile from './components/Profile';
 import SignUp from './components/SignUp';
 
 
@@ -17,6 +18,7 @@ ReactDOM.render(
             <Route exact path='/Login' element={<LoginForm/>} />
             <Route exact path='/SignUp' element={<SignUp/>} />
             <Route exact path='/PayStubs' element={<PayStubs/>} />
+            <Route exact path='/Profile' element={<Profile/>} />
             //write other paths below
         </Routes>
     </BrowserRouter>,
