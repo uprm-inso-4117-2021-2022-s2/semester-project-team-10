@@ -18,6 +18,8 @@ const [password, setPassword] = useState("");
 const [validPassword, validatePassword] = useState(true);
 const [wage, setWage] = useState();
 const [role, setRole] = useState("");
+const [first_name, setFN] = useState("");
+const [last_name, setLN] = useState("");
 
 const [message, setMessage] = useState("");
 const [successful, setSuccessful] = useState(false);
@@ -26,6 +28,17 @@ const onChangeUsername = (e) => {
     const username = e.target.value;
     setUsername(username);
 }
+
+const onChangeFN = (e) => {
+  const first_name = e.target.value;
+  setFN(first_name);
+}
+
+const onChangeLN = (e) => {
+  const last_name = e.target.value;
+  setLN(last_name);
+}
+
 
 const onChangeEmail = (e) => {
     const email = e.target.value;
@@ -67,7 +80,7 @@ const handleRegister = (e) => {
     setMessage(""); //error message that can be displayed
     setSuccessful(false);
 
-    AuthService.register(username, email, password, role, wage).then(
+    AuthService.register(username, email, password, role, wage, first_name, last_name).then(
         (response) => {
           setMessage(response.data.message);
           setSuccessful(true);
@@ -100,6 +113,14 @@ return (
           <Form.Input fluid icon='user' iconPosition='left' placeholder='Username' //username
             value={username}
             onChange={onChangeUsername}
+          />
+           <Form.Input fluid placeholder='First Name' //first_name
+            value={first_name}
+            onChange={onChangeFN}
+          />
+           <Form.Input fluid  placeholder='Last Name' //last_name
+            value={last_name}
+            onChange={onChangeLN}
           />
           <Form.Input fluid icon='mail' iconPosition='left' placeholder='E-mail address' // email
           value={email}

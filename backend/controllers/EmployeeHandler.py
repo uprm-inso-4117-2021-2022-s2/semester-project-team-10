@@ -5,7 +5,7 @@ from werkzeug.security import generate_password_hash, check_password_hash
 class BaseEmployee:
     #For GET requests
     def build_row_dict(self, row):
-       # query = "select employee_id, username, user_email, role, wage, first_name, last_name from Employee"
+       # query = "select employee_id, username, user_email, role, wage, first_name, last_name from 'Employee'"
         result = {
             "employee_id": row[0],
             "username": row[1],
