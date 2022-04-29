@@ -12,7 +12,7 @@ class EmployeeDAO:
 
     def insertEmployee(self, username, user_email, user_password, role, wage, first_name, last_name):
         cursor = self.conn.cursor()
-        query = 'insert into "Employee" (username, user_email, user_password, role, wage) ' \
+        query = 'insert into "Employee" (username, user_email, user_password, role, wage, first_name, last_name) ' \
                 'select %s as username, %s as user_email, ' \
                 '%s as user_password, %s as role, %s as wage, %s as first_name, %s as last_name from "Employee" ' \
                 'where not exists( ' \
