@@ -2,13 +2,15 @@ import axios from "axios";
 
 const API_URL = "https://time-flocker-2022.herokuapp.com/";
 
-const register = (username, user_email, user_password, role, wage) => {
+const register = (username, user_email, user_password, role, wage, first_name, last_name) => {
   return axios.post(API_URL + "employee", {
     username,
     user_email,
     user_password,
     role,
-    wage
+    wage,
+    first_name, 
+    last_name
   });
 };
 
