@@ -24,7 +24,7 @@ const Profile = (props) => {
   
     const [data, setdata] = useState({
       "username": currentUser.user_data[0].username,
-      "employee_id": currentUser.user_data[0].employee_id,
+      "employee_id": currentUser.user_data[0].employee_id, //might not want to store employee_id as it is sensitive data
     //   "password": ""
     });
 
@@ -40,7 +40,7 @@ return (
             <Menu.Item>
             <Input placeholder="Search..." size="small" />
             </Menu.Item>
-            <Menu.Item as="a">Dashboard</Menu.Item>
+            <Menu.Item as={Link} to="/Dashboard">Dashboard</Menu.Item>
             <Menu.Item as="a">Settings</Menu.Item>
             <Menu.Item active as="a">Profile</Menu.Item>
             <Menu.Item as="a">Help</Menu.Item>
@@ -74,7 +74,7 @@ return (
             vertical
             //style={this.state.dropdownMenuStyle}
         >
-            <Menu.Item as="a">Dashboard</Menu.Item>
+            <Menu.Item as={Link} to="/Dashboard">Dashboard</Menu.Item>
             <Menu.Item as="a">Settings</Menu.Item>
             <Menu.Item active as="a">Profile</Menu.Item>
             <Menu.Item as="a">Help</Menu.Item>

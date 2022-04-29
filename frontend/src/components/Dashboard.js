@@ -1,7 +1,10 @@
 import React, { Component, useEffect, useState } from "react";
-import { useSearchParams } from "react-router-dom";
+import { Link, useSearchParams } from "react-router-dom";
 
 import "semantic-ui-css/semantic.min.css";
+
+import Chart from 'chart.js/auto'
+import { Pie } from "react-chartjs-2";
 
 import {
   Button,
@@ -16,6 +19,7 @@ import {
   Table
 } from "semantic-ui-react";
 import userServices from "../services/user.services";
+import AuthService from "../services/auth.service";
 
 import "./Dashboard.css";
 
@@ -36,6 +40,14 @@ const Dashboard = (props) => {
 
   //   this.setState(newState);
   // };
+
+  const currentUser = AuthService.getCurrentUser();
+  
+  const [data, setdata] = useState({
+    "username": currentUser.user_data[0].username,
+    "employee_id": currentUser.user_data[0].employee_id,
+  //   "password": ""
+  });
 
   const [tableData, setTableData] = useState([{}]);
 
@@ -64,9 +76,9 @@ const Dashboard = (props) => {
               <Menu.Item>
                 <Input placeholder="Search..." size="small" />
               </Menu.Item>
-              <Menu.Item as="a">Dashboard</Menu.Item>
+              <Menu.Item active as="a">Dashboard</Menu.Item>
               <Menu.Item as="a">Settings</Menu.Item>
-              <Menu.Item as="a">Profile</Menu.Item>
+              <Menu.Item as={Link} to="/Profile">Profile</Menu.Item>
               <Menu.Item as="a">Help</Menu.Item>
               <Menu.Item as="a">Login/Signup</Menu.Item>
             </Menu.Menu>
@@ -98,9 +110,9 @@ const Dashboard = (props) => {
               vertical
               //style={this.state.dropdownMenuStyle}
             >
-              <Menu.Item as="a">Dashboard</Menu.Item>
+              <Menu.Item active as={Link} to="/Dashboard">Dashboard</Menu.Item>
               <Menu.Item as="a">Settings</Menu.Item>
-              <Menu.Item as="a">Profile</Menu.Item>
+              <Menu.Item as={Link} to="/Profile">Profile</Menu.Item>
               <Menu.Item as="a">Help</Menu.Item>
               <Menu.Item as="a">Login/Signup</Menu.Item>
               <Divider fitted />
@@ -118,6 +130,7 @@ const Dashboard = (props) => {
             id="sidebar"
           >
             <Image circular size='big' src="/static/images/wireframe/square-image.png"/>
+            <Header size="huge" textAlign="center">{data.username}</Header>
             <Divider section/>
             <Menu vertical borderless fluid text>
               <Menu.Item active as="a">
@@ -143,54 +156,67 @@ const Dashboard = (props) => {
                 </Header>
               </Grid.Row>
               <Grid.Row textAlign="center">
+                {/* Pie Chart #1 */}
                 <Grid.Column mobile={8} tablet={4} computer={4}>
-                  <Image
-                    centered
-                    circular
-                    size="small"
-                    src="/static/images/wireframe/square-image.png"
-                  />
-                  <Label basic size="large">
-                    Label
-                  </Label>
-                  <p>Something else</p>
+                  <Pie
+                    data={{ labels: ['Red', 'Blue', 'Yellow', 'Green', 'Purple', 'Orange'],
+                    datasets: [ {
+                        label: '# of votes',
+                        data: [12, 23, 8, 19, 60, 1],
+                        backgroundColor: [
+                            'rgba(255, 99, 132, 0.2)',
+                            'rgba(54, 162, 235, 0.2)',
+                            'rgba(255, 206, 86, 0.2)',
+                            'rgba(75, 192, 192, 0.2)',
+                            'rgba(153, 102, 255, 0.2)',
+                            'rgba(255, 159, 64, 0.2)'
+                        ],
+                        borderColor: [
+                            'rgba(255, 99, 132, 1)',
+                            'rgba(54, 162, 235, 1)',
+                            'rgba(255, 206, 86, 1)',
+                            'rgba(75, 192, 192, 1)',
+                            'rgba(153, 102, 255, 1)',
+                            'rgba(255, 159, 64, 1)'
+                        ],
+                        borderWidth: 1
+                    }]
+                            }}
+                    width={2000}
+                    height={2000}
+                    options={{mainAspectRatio: false}}/>
                 </Grid.Column>
+                {/* Pie chart #2 */}
                 <Grid.Column mobile={8} tablet={4} computer={4}>
-                  <Image
-                    centered
-                    circular
-                    size="small"
-                    src="/static/images/wireframe/square-image.png"
-                  />
-                  <Label basic size="large">
-                    Label
-                  </Label>
-                  <p>Something else</p>
+                  <Pie
+                    data={{ labels: ['Red', 'Blue', 'Yellow', 'Green', 'Purple', 'Orange'],
+                    datasets: [ {
+                        label: '# of votes',
+                        data: [2, 50, 28, 5, 10, 1],
+                        backgroundColor: [
+                            'rgba(255, 99, 132, 0.2)',
+                            'rgba(54, 162, 235, 0.2)',
+                            'rgba(255, 206, 86, 0.2)',
+                            'rgba(75, 192, 192, 0.2)',
+                            'rgba(153, 102, 255, 0.2)',
+                            'rgba(255, 159, 64, 0.2)'
+                        ],
+                        borderColor: [
+                            'rgba(255, 99, 132, 1)',
+                            'rgba(54, 162, 235, 1)',
+                            'rgba(255, 206, 86, 1)',
+                            'rgba(75, 192, 192, 1)',
+                            'rgba(153, 102, 255, 1)',
+                            'rgba(255, 159, 64, 1)'
+                        ],
+                        borderWidth: 1
+                    }]
+                            }}
+                    width={2000}
+                    height={2000}
+                    options={{mainAspectRatio: false}}/>
                 </Grid.Column>
-                <Grid.Column mobile={8} tablet={4} computer={4}>
-                  <Image
-                    centered
-                    circular
-                    size="small"
-                    src="/static/images/wireframe/square-image.png"
-                  />
-                  <Label basic size="large">
-                    Label
-                  </Label>
-                  <p>Something else</p>
-                </Grid.Column>
-                <Grid.Column mobile={8} tablet={4} computer={4}>
-                  <Image
-                    centered
-                    circular
-                    size="small"
-                    src="/static/images/wireframe/square-image.png"
-                  />
-                  <Label basic size="large">
-                    Label
-                  </Label>
-                  <p>Something else</p>
-                </Grid.Column>
+
               </Grid.Row>
               <Divider section hidden />
               <Grid.Row>
