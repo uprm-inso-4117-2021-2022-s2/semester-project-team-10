@@ -102,8 +102,8 @@ const handleRegister = (e) => {
 return (
   <Grid textAlign='center' style={{ height: '100vh' }} verticalAlign='middle'>
     <Grid.Column style={{ maxWidth: 450 }}>
-      <Header as='h2' color='teal' textAlign='center'>
-        <Image src='\static\images\wireframe\Time-Flocker-logo.png'
+      <Header as='h2' color='black' textAlign='center'>
+        <Image src='\Time-Flocker-logo.png'
             as={Link}
             to="/"/> Register a new acount
       </Header>
@@ -188,7 +188,7 @@ return (
               </div>
             </Form.Group>
           )}
-          <Button type='submit' color='teal' fluid size='large'>
+          <Button type='submit' color='black' fluid size='large'>
             Sing Up
           </Button>
         </Segment>
