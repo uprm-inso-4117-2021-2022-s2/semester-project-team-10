@@ -32,10 +32,11 @@ const Profile = (props) => {
 return (
     <div className="App">
     <Grid padded className="tablet computer only">
-        <Menu borderless inverted fluid fixed="top">
-        <Menu.Item header as="a">
-            Timeflocker
-        </Menu.Item>
+        <Menu borderless inverted fluid fixed="top" color="red">
+            <Menu.Item content header as={Link} to='/'>
+              <Image size='mini' src='/Time-Flocker-logo.png' style={{ marginRight: '1.5em' }}/>
+              Timeflocker
+            </Menu.Item>
         <Menu.Menu position="right">
             <Menu.Item>
             <Input placeholder="Search..." size="small" />

@@ -16,12 +16,14 @@ import {
   Image,
   Label,
   Menu,
-  Table
+  Table,
+  TableBody
 } from "semantic-ui-react";
 import userServices from "../services/user.services";
 import AuthService from "../services/auth.service";
 
 import "./Dashboard.css";
+import authService from "../services/auth.service";
 
 const Dashboard = (props) => {
   // state = {
@@ -49,13 +51,18 @@ const Dashboard = (props) => {
   //   "password": ""
   });
 
-  const [tableData, setTableData] = useState([{}]);
+  const [tableData, setTableData] = useState(false);
 
   const getTableData = () => {
     userServices.getTimehsheets().then(
     (response) => {
-      setTableData(response.data);
-
+      if(response.data == 'Not Found'){
+        setTableData(false);
+      }
+      else{
+        setTableData(response.data);
+      }
+      
     }).catch((error) => {
       console.log(error);
     })
@@ -68,8 +75,9 @@ const Dashboard = (props) => {
     return (
       <div className="App">
         <Grid padded className="tablet computer only">
-          <Menu borderless inverted fluid fixed="top">
-            <Menu.Item header as="a">
+          <Menu borderless inverted fluid fixed="top" color="red">
+            <Menu.Item content header as={Link} to='/'>
+              <Image size='mini' src='/Time-Flocker-logo.png' style={{ marginRight: '1.5em' }}/>
               Timeflocker
             </Menu.Item>
             <Menu.Menu position="right">
@@ -78,15 +86,21 @@ const Dashboard = (props) => {
               </Menu.Item>
               <Menu.Item active as="a">Dashboard</Menu.Item>
               <Menu.Item as="a">Settings</Menu.Item>
-              <Menu.Item as={Link} to="/Profile">Profile</Menu.Item>
+              {authService.isLoggedIn() //for some reason, it works counter-intuitive
+              ? <Menu.Item as={Link} to="/Profile">Profile</Menu.Item>
+              : null
+            } 
               <Menu.Item as="a">Help</Menu.Item>
-              <Menu.Item as="a">Login/Signup</Menu.Item>
+              {!authService.isLoggedIn() //for some reason, it works counter-intuitive
+              ? <Menu.Item as={Link} to='/Profile'>Hello, {currentUser.user_data[0].first_name} </Menu.Item>
+              : <Menu.Item as="a">Login/Sign Up</Menu.Item>}
+              
             </Menu.Menu>
           </Menu>
         </Grid>
         <Grid padded className="mobile only">
           <Menu borderless inverted fluid fixed="top">
-            <Menu.Item header as="a">
+            <Menu.Item header as={Header} size="big">
               Timeflocker
             </Menu.Item>
             {/* <Menu.Menu position="left">
@@ -129,7 +143,7 @@ const Dashboard = (props) => {
             only="tablet computer"
             id="sidebar"
           >
-            <Image circular size='big' src="/static/images/wireframe/square-image.png"/>
+            <Image circular size='big' src="/square-image.png"/>
             <Header size="huge" textAlign="center">{data.username}</Header>
             <Divider section/>
             <Menu vertical borderless fluid text>
@@ -225,7 +239,7 @@ const Dashboard = (props) => {
                 </Header>
               </Grid.Row>
               <Grid.Row>
-                <Table singleLine striped selectable unstackable
+                <Table color="red" singleLine striped selectable unstackable
                 tableData={['some', 'random', 'array']}>
                   <Table.Header>
                     <Table.Row>
@@ -235,24 +249,35 @@ const Dashboard = (props) => {
                       <Table.HeaderCell>Hours Worked</Table.HeaderCell>
                     </Table.Row>
                   </Table.Header>
-                  <Table.Body>
-            {Object.values(tableData).map(
-              ({ work_desc, start_time, end_time}) => {
-                let start_formatted = new Date(start_time);
-                let end_formatted = new Date(end_time);
-                let hours_worked = (Math.abs(end_formatted
-                - start_formatted) / 36e5).toFixed(2); 
-                return (
-                  <Table.Row>
-                    <Table.Cell>{work_desc}</Table.Cell>
-                    <Table.Cell>{start_time}</Table.Cell>
-                    <Table.Cell>{end_time}</Table.Cell>
-                    <Table.Cell>{hours_worked} hour(s)</Table.Cell>
-                  </Table.Row>
-                );
-              }
-            )}
-          </Table.Body>
+                      {tableData 
+                      ? <Table.Body>
+                          {Object.values(tableData).map(
+                            ({ work_desc, start_time, end_time}) => {
+                              let start_formatted = new Date(start_time);
+                              let end_formatted = new Date(end_time);
+                              let hours_worked = (Math.abs(end_formatted
+                              - start_formatted) / 36e5).toFixed(2); 
+                              return (
+                                <Table.Row>
+                                  <Table.Cell>{work_desc}</Table.Cell>
+                                  <Table.Cell>{start_time}</Table.Cell>
+                                  <Table.Cell>{end_time}</Table.Cell>
+                                  <Table.Cell>{hours_worked} hour(s)</Table.Cell>
+                                </Table.Row>
+                              );
+                            }
+                          )
+                          }
+                        </Table.Body>
+                      :  <Table.Body>
+                          <Table.Row>
+                                  <Table.Cell>No data</Table.Cell>
+                                  <Table.Cell>No data</Table.Cell>
+                                  <Table.Cell>No data</Table.Cell>
+                                  <Table.Cell>No data</Table.Cell>
+                          </Table.Row>
+                        </Table.Body>
+                        }
                 </Table>
               </Grid.Row>
             </Grid>

@@ -1,10 +1,11 @@
 import React, { useState, useRef } from 'react'
-import { withRouter, Link } from 'react-router-dom'
+import { withRouter, Link, Navigate } from 'react-router-dom'
 import { Icon, Button, Form, Grid, Header, Image, Message, Segment } from 'semantic-ui-react'
 import EmailValidator, { validate } from 'email-validator';
 import passwordValidator from 'password-validator';
 
 import AuthService from "../services/auth.service";
+import Dashboard from './Dashboard';
 
 
 const LoginForm = (props) => {
@@ -79,8 +80,8 @@ const handleLogin = (e) => {
 return (
 <Grid textAlign='center' style={{ height: '100vh' }} verticalAlign='middle'>
     <Grid.Column style={{ maxWidth: 450 }}>
-    <Header as='h2' color='teal' textAlign='center'>
-        <Image src='\static\images\wireframe\Time-Flocker-logo.png'
+    <Header as='h2' color='black' textAlign='center'>
+        <Image src='\Time-Flocker-logo.png'
         as={Link}
         to="/"/> Log-in to your account
     </Header>
@@ -108,7 +109,7 @@ return (
             }}
         />
 
-        <Button type='submit' color='teal' fluid size='large'>
+        <Button type='submit' color='black' fluid size='large'>
             Login
         </Button>
         <Message negative hidden={successful}>

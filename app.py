@@ -1,6 +1,8 @@
 #from distutils.log import debug
+from crypt import methods
 import os
 from urllib import response
+from controllers.SickDaysHandler import BaseSickRequest
 from flask_sqlalchemy import SQLAlchemy
 import flask_praetorian
 from flask import Flask, jsonify, request, render_template
@@ -102,6 +104,15 @@ def handleTimesheet(employee_id):
         return BaseTimesheet().createTimesheet(request.json)
     if request.method == "PUT":
         return jsonify("This is a PUT"), 200
+
+@app.route('/sickRequest/<int:employee_id>', methods = ['GET', 'PUT', 'POST'])
+def handleSickRequest(employee_id):
+    if request.method == "GET":
+        return None
+    if request.method == "POST":
+        return BaseSickRequest().createSickRequest(request.json)
+    if request.method == "PUT":
+        return None
 
 # start app with main method
 if __name__ == "__main__":
