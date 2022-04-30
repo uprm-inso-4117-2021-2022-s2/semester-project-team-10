@@ -68,8 +68,9 @@ const Dashboard = (props) => {
     return (
       <div className="App">
         <Grid padded className="tablet computer only">
-          <Menu borderless inverted fluid fixed="top">
+          <Menu borderless inverted fluid fixed="top" color="red">
             <Menu.Item header as="a">
+              <Image size='mini' src='/Time-Flocker-logo.png' style={{ marginRight: '1.5em' }}/>
               Timeflocker
             </Menu.Item>
             <Menu.Menu position="right">

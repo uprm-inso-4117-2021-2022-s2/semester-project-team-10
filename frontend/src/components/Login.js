@@ -1,10 +1,11 @@
 import React, { useState, useRef } from 'react'
-import { withRouter, Link } from 'react-router-dom'
+import { withRouter, Link, Navigate } from 'react-router-dom'
 import { Icon, Button, Form, Grid, Header, Image, Message, Segment } from 'semantic-ui-react'
 import EmailValidator, { validate } from 'email-validator';
 import passwordValidator from 'password-validator';
 
 import AuthService from "../services/auth.service";
+import Dashboard from './Dashboard';
 
 
 const LoginForm = (props) => {
