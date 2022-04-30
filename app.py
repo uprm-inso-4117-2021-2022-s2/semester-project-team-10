@@ -2,7 +2,7 @@
 from crypt import methods
 import os
 from urllib import response
-from controllers.SickDaysHandler import BaseSickRequest
+
 from flask_sqlalchemy import SQLAlchemy
 import flask_praetorian
 from flask import Flask, jsonify, request, render_template
@@ -19,7 +19,7 @@ from flask_jwt_extended import create_access_token, get_jwt_identity, jwt_requir
 # import handlers
 from backend.controllers.TimesheetHandler import BaseTimesheet
 from backend.controllers.EmployeeHandler import BaseEmployee
-
+from backend.controllers.SickDaysHandler import BaseSickRequest
 app = Flask(__name__)
 db = SQLAlchemy(app)                       #initialize SQLAlchemy
 guard = flask_praetorian.Praetorian()      #initialize flask praetorian
