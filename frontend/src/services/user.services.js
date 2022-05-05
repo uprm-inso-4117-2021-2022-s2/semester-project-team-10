@@ -10,7 +10,7 @@ const currentUser = AuthService.getCurrentUser(); // remember to handle when the
 
 //gets all timesheets of an user
 const getTimehsheets = () => {
-  return axios.get(API_URL + "/timesheet/" + `${currentUser.user_data[0].employee_id}`, { headers: authHeader() });
+  return axios.get(API_URL + "/timesheet/" + `${currentUser?.user_data[0].employee_id}`, { headers: authHeader() });
 };
 
 

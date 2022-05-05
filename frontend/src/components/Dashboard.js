@@ -46,8 +46,8 @@ const Dashboard = (props) => {
   const currentUser = AuthService.getCurrentUser();
   
   const [data, setdata] = useState({
-    "username": currentUser.user_data[0].username,
-    "employee_id": currentUser.user_data[0].employee_id,
+    "username": currentUser?.user_data[0].username,
+    "employee_id": currentUser?.user_data[0].employee_id,
   //   "password": ""
   });
 
@@ -92,7 +92,7 @@ const Dashboard = (props) => {
             } 
               <Menu.Item as="a">Help</Menu.Item>
               {!authService.isLoggedIn() //for some reason, it works counter-intuitive
-              ? <Menu.Item as={Link} to='/Profile'>Hello, {currentUser.user_data[0].first_name} </Menu.Item>
+              ? <Menu.Item as={Link} to='/Profile'>Hello, {currentUser?.user_data[0].first_name} </Menu.Item>
               : <Menu.Item as="a">Login/Sign Up</Menu.Item>}
               
             </Menu.Menu>
