@@ -16,6 +16,7 @@
 
 # testing
 /coverage
+/frontend/.stryker-tmp
 
 # production
 /build
